@@ -1,0 +1,7 @@
+{
+    "packagesName": "dev.tkhm",
+    "apiPackage": "dev.tkhm.api",
+    "modelPackage": "dev.tkhm.model",
+    "invokerPackage": "dev.tkhm.invoker",
+    "interfaceOnly": true
+}

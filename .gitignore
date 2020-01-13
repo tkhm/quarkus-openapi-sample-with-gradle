@@ -1,0 +1,39 @@
+# Eclipse
+.project
+.classpath
+.settings/
+bin/
+
+# IntelliJ
+.idea
+*.ipr
+*.iml
+*.iws
+
+# NetBeans
+nb-configuration.xml
+
+# Visual Studio Code
+.vscode
+
+# OSX
+.DS_Store
+
+# Vim
+*.swp
+*.swo
+
+# patch
+*.orig
+*.rej
+
+# Gradle
+.gradle/
+build/
+
+# openapi generated sourceはGeneration Gapパターンを採用するためトラック対象外
+gen/
+src/main/openapi/openapi.yaml
+
+# このプロジェクトではPOMは使用しない
+pom.xml

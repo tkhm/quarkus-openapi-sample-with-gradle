@@ -1,0 +1,55 @@
+plugins {
+    id 'java'
+    id 'io.quarkus'
+    id "org.openapi.generator" version "4.2.2"
+}
+
+repositories {
+     mavenLocal()
+     mavenCentral()
+}
+
+dependencies {
+    implementation 'io.quarkus:quarkus-vertx-web'
+    implementation 'io.quarkus:quarkus-smallrye-openapi'
+    implementation 'io.quarkus:quarkus-resteasy-jackson'
+    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+    implementation 'io.quarkus:quarkus-resteasy'
+
+    // swagger
+    implementation group: 'io.swagger', name: 'swagger-annotations', version: '1.6.0'
+
+    testImplementation 'io.quarkus:quarkus-junit5'
+    testImplementation 'io.rest-assured:rest-assured'
+}
+
+group 'dev.tkhm'
+version '1.0.0-SNAPSHOT'
+
+compileJava {
+    options.compilerArgs << '-parameters'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+/* OpenAPIの自動生成処理をビルド時に実行する */
+compileJava.dependsOn tasks.openApiValidate, tasks.openApiGenerate
+
+openApiValidate {
+    inputSpec = "${rootDir}/src/main/resources/META-INF/openapi.yaml"
+}
+
+openApiGenerate {
+    generatorName = 'jaxrs-spec'
+    configFile = "${rootDir}/src/main/resources/config.json"
+    inputSpec = "${rootDir}/src/main/resources/META-INF/openapi.yaml"
+    outputDir = "${rootDir}"
+    configOptions = [
+        dateLibrary: "java11"
+    ]
+}
+
+sourceSets.main.java.srcDir "${rootDir}/src/gen/java"
