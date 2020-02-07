@@ -48,7 +48,7 @@ openApiGenerate {
     inputSpec = "${rootDir}/src/main/resources/META-INF/openapi.yaml"
     outputDir = "${rootDir}"
     configOptions = [
-        dateLibrary: "java11"
+        dateLibrary: "java8"
     ]
 }
 
